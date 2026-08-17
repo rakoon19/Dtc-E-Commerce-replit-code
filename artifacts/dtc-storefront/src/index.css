@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -38,40 +38,40 @@
 }
 
 :root {
-  --background: 37 40% 96%;
-  --foreground: 162 28% 14%;
-  --border: 36 25% 84%;
-  --input: 36 25% 84%;
-  --ring: 164 34% 31%;
-  --card: 39 43% 98%;
-  --card-foreground: 162 28% 14%;
-  --card-border: 36 25% 87%;
-  --popover: 39 43% 98%;
-  --popover-foreground: 162 28% 14%;
-  --primary: 164 34% 25%;
-  --primary-foreground: 38 45% 96%;
-  --secondary: 36 47% 89%;
-  --secondary-foreground: 162 28% 14%;
-  --muted: 35 30% 91%;
-  --muted-foreground: 162 10% 42%;
-  --accent: 11 48% 61%;
-  --accent-foreground: 39 43% 98%;
-  --destructive: 5 58% 50%;
-  --destructive-foreground: 39 43% 98%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 8%;
+  --border: 0 0% 82%;
+  --input: 0 0% 82%;
+  --ring: 0 0% 8%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 8%;
+  --card-border: 0 0% 88%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 8%;
+  --primary: 0 0% 8%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 95%;
+  --secondary-foreground: 0 0% 8%;
+  --muted: 0 0% 94%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 0 0% 48%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 65% 48%;
+  --destructive-foreground: 0 0% 100%;
   --app-font-sans: 'DM Sans', ui-sans-serif, sans-serif;
-  --app-font-serif: 'Playfair Display', Georgia, serif;
+  --app-font-serif: 'DM Sans', ui-sans-serif, sans-serif;
   --app-font-mono: 'DM Sans', ui-monospace, monospace;
-  --radius: 0.75rem;
-  --shadow-sm: 0 8px 25px hsl(162 28% 14% / 0.06);
-  --shadow-md: 0 16px 35px hsl(162 28% 14% / 0.10);
-  --sidebar: 164 34% 25%;
-  --sidebar-foreground: 38 45% 96%;
-  --sidebar-border: 164 26% 32%;
-  --sidebar-primary: 11 48% 61%;
-  --sidebar-primary-foreground: 39 43% 98%;
-  --sidebar-accent: 164 29% 31%;
-  --sidebar-accent-foreground: 38 45% 96%;
-  --sidebar-ring: 11 48% 61%;
+  --radius: 0.3rem;
+  --shadow-sm: 0 10px 25px hsl(0 0% 0% / 0.05);
+  --shadow-md: 0 16px 35px hsl(0 0% 0% / 0.10);
+  --sidebar: 0 0% 8%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-border: 0 0% 18%;
+  --sidebar-primary: 0 0% 100%;
+  --sidebar-primary-foreground: 0 0% 8%;
+  --sidebar-accent: 0 0% 18%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-ring: 0 0% 100%;
 }
 
 .dark {
@@ -113,7 +113,7 @@
 }
 
 @layer utilities {
-  .font-display { font-family: var(--app-font-serif); }
+  .font-display { font-family: var(--app-font-serif); font-style: italic; font-weight: 700; letter-spacing: -.045em; }
   .field { width: 100%; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: .85rem 1rem; font-size: .875rem; outline: none; }
   .field:focus { border-color: hsl(var(--primary)); box-shadow: 0 0 0 2px hsl(var(--primary) / .08); }
   .field::placeholder { color: hsl(var(--muted-foreground)); }
@@ -134,6 +134,122 @@
   .delay-2 { animation-delay: .16s; }
   .delay-3 { animation-delay: .24s; }
   .delay-4 { animation-delay: .32s; }
+}
+
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+
+.juice-hero {
+  position: relative;
+  min-height: min(770px, 82vh);
+  overflow: hidden;
+  background: #151515;
+}
+
+.hero-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: min(770px, 82vh);
+}
+
+.hero-panel {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  background: #232323;
+}
+
+.hero-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(.35) contrast(1.08) brightness(.72);
+  transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+
+.hero-panel:hover img {
+  transform: scale(1.04);
+  filter: grayscale(.1) contrast(1.05) brightness(.82);
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.10) 15%, rgba(0,0,0,.72) 100%);
+}
+
+.ink-band {
+  background: #090909;
+}
+
+.collection-tile {
+  position: relative;
+  display: block;
+  min-height: 420px;
+  overflow: hidden;
+  background: #e8e8e8;
+}
+
+.collection-tile img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  filter: grayscale(.18) contrast(1.04);
+  transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+
+.collection-tile:hover img {
+  transform: scale(1.035);
+  filter: grayscale(0);
+}
+
+.collection-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.68));
+}
+
+.collection-tile-copy {
+  position: absolute;
+  left: 1.75rem;
+  right: 1.75rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-family: var(--app-font-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+
+@media (max-width: 767px) {
+  .hero-panels {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .juice-hero {
+    min-height: auto;
+  }
+
+  .hero-panel {
+    min-height: 61vh;
+  }
+
+  .hero-panel + .hero-panel {
+    min-height: 46vh;
+  }
 }
 
 @keyframes rise-in {
