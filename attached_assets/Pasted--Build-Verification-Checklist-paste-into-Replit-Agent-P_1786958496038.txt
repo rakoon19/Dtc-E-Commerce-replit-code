@@ -1,0 +1,79 @@
+# Build Verification Checklist — paste into Replit Agent
+
+Paste this in after each phase (or all at once at the end). Tell the agent:
+
+> "Go through this checklist for [Phase X / the whole app]. For each item, verify it actually works by testing it yourself — don't just check the code exists. If something is missing or broken, fix/build it now, then tick it off with what you did."
+
+---
+
+## Phase 1 — Scaffolding
+- [ ] Frontend (`Next.js`) starts with zero errors
+- [ ] Backend (`Express`) starts with zero errors
+- [ ] MongoDB connects successfully (confirm via console log, not assumption)
+- [ ] `.env` file used for all secrets — none hardcoded in source files
+- [ ] Frontend can successfully call at least one backend endpoint (test call)
+
+## Phase 2 — Data models
+- [ ] `Product` schema has `hasVariants` boolean + optional `variants[]` (color/size/sku/stock)
+- [ ] `Product` has plain `stock` field used only when `hasVariants` is false
+- [ ] `Order.items[]` stores a **snapshot** of title/price/sku at order time (not a live reference to Product)
+- [ ] `Order` has `paymentMethod` enum (`sslcommerz` / `cod`) and `paymentStatus` enum
+- [ ] `Coupon` schema supports both flat and percentage discount, usage limit, expiry
+- [ ] `slug`, `sku`, `couponCode` fields are indexed/unique
+- [ ] Agent shows a real sample document from each collection (not just schema code)
+
+## Phase 3 — Auth
+- [ ] Customer can sign up / log in
+- [ ] Admin role exists and is assignable
+- [ ] Visiting `/admin/*` while logged in as a normal customer is blocked
+- [ ] Visiting `/admin/*` while logged out is blocked
+- [ ] Admin-check happens in backend middleware, not just hidden in frontend UI — agent shows the middleware file
+
+## Phase 4 — Product catalog
+- [ ] Collections page lists products by category (fashion / cosmetics)
+- [ ] Product with variants shows a color/size picker
+- [ ] Product without variants shows no picker, just add-to-cart
+- [ ] Selecting a variant updates price/stock shown correctly
+- [ ] Out-of-stock variant is disabled or clearly marked, not purchasable
+
+## Phase 5 — Cart
+- [ ] Add to cart works for both variant and non-variant products
+- [ ] Update quantity and remove item both work
+- [ ] Cart persists on page refresh
+- [ ] Cart total recalculates correctly when items change
+
+## Phase 6 — Checkout (pre-payment)
+- [ ] Address form validates required fields
+- [ ] Order is created with `paymentStatus: pending`
+- [ ] Price/total is recalculated **server-side** from the database — test by tampering with the price in browser devtools/network request and confirming the server ignores it
+- [ ] Stock is checked before order creation — try ordering more than available stock and confirm it's rejected
+
+## Phase 7 — Payment (SSLCommerz + COD)
+- [ ] SSLCommerz sandbox checkout redirect works end-to-end
+- [ ] Order only flips to `paid` after the **IPN webhook** is received and validated — not just after the redirect
+- [ ] Sending the same IPN/transaction ID twice does **not** double-fulfill the order or double-decrement stock (ask agent to demonstrate this test)
+- [ ] COD orders skip payment gateway but still go through stock check and order creation
+- [ ] Failed/cancelled payment is handled (order marked `failed`, stock not decremented)
+
+## Phase 8 — Admin panel
+- [ ] Admin can create/edit/delete products, including variants
+- [ ] Admin can view all orders and update order status
+- [ ] Admin can create/edit coupons
+- [ ] Admin dashboard shows a basic orders/revenue snapshot
+
+## Phase 9 — Polish
+- [ ] Every data-fetching page has a loading state, an empty state, and an error state (test by throttling network / triggering an error)
+- [ ] Meta tags exist on product/collection pages
+- [ ] `sitemap.xml` and `robots.txt` exist
+- [ ] Site is usable on mobile width (test at 375px)
+- [ ] Images use Next.js `<Image>` component
+
+## Phase 10 — Pre-launch
+- [ ] No secrets visible in frontend network requests or bundled JS (check browser devtools)
+- [ ] Full guest checkout tested end-to-end in SSLCommerz sandbox
+- [ ] Coupon apply endpoint and checkout endpoint have basic rate limiting
+- [ ] API errors return a consistent shape (`{ success, message }`) across endpoints
+
+---
+
+**Tell the agent explicitly:** if any box can't be ticked truthfully, it must build/fix that piece before moving on — not describe it as done when it isn't.
