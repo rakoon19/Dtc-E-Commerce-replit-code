@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "DTC Storefront"
+description = "A production-minded Bangladeshi direct-to-consumer storefront for fashion attire and cosmetics, with a polished shopping experience ready to connect to catalog, checkout, and admin services."
+version = "1.0.0"
+id = "artifacts/dtc-storefront"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18905
+
+[services.development]
+run = "pnpm --filter @workspace/dtc-storefront run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dtc-storefront", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/dtc-storefront/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18905"
+BASE_PATH = "/"
