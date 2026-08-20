@@ -17,26 +17,13 @@ A DTC storefront prototype built as an npm workspace monorepo — Vite/React sto
    ```
    `--legacy-peer-deps` is required due to an `esbuild` version conflict between the API server and `esbuild-plugin-pino`.
 
-2. **Environment variables**
-
-   Create `artifacts/api-server/.env`:
-   ```
-   PORT=8080
-   ```
-
-   Create `artifacts/dtc-storefront/.env`:
-   ```
-   PORT=18905
-   BASE_PATH=/
-   ```
-
-3. **Run the API server** (in one terminal)
+2. **Run the API server** (in one terminal)
    ```bash
    npm run dev --workspace=@workspace/api-server
    ```
    Serves at `http://localhost:8080`
 
-4. **Run the storefront** (in another terminal)
+3. **Run the storefront** (in another terminal)
    ```bash
    npm run dev --workspace=@workspace/dtc-storefront
    ```
