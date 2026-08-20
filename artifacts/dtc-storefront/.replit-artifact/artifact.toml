@@ -12,10 +12,10 @@ paths = [ "/" ]
 localPort = 18905
 
 [services.development]
-run = "pnpm --filter @workspace/dtc-storefront run dev"
+run = "npm run dev --workspace=@workspace/dtc-storefront"
 
 [services.production]
-build = [ "pnpm", "--filter", "@workspace/dtc-storefront", "run", "build" ]
+build = [ "npm", "run", "build", "--workspace=@workspace/dtc-storefront" ]
 serve = "static"
 publicDir = "artifacts/dtc-storefront/dist/public"
 

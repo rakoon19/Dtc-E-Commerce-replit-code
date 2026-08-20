@@ -1,0 +1,1 @@
+- [npm workspace migration](npm-workspaces.md) — clean old dependency trees before npm installs to avoid stale workspace-protocol errors.
